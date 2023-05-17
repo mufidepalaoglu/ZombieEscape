@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+public class Button : MonoBehaviour
+{
+    // Start is called before the first frame update
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    // Start is called before the first frame update
+    public void main()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+    }
+    public void Başla()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        
+    }
+}
