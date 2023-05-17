@@ -1,0 +1,99 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class PlayerMove : MonoBehaviour
+{
+    
+    public float speed = 5f;
+    public float leftRightSpeed = 4f;
+    public GameObject Dead;
+    public GameObject Finish;
+    public Text timer;
+    private float starttime;
+    private float t;
+    private float starttime1;
+    private float t1;
+    public Text timer1;
+    public GameObject timer2;
+    private bool mybool;
+    
+
+    private void Start()
+    {
+        Time.timeScale = 1;
+        starttime = Time.time;
+        starttime1 = Time.time;
+        
+
+    }
+
+    void Update()
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime,Space.World);
+
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (this.gameObject.transform.position.x>LevelBoundary.leftSide)
+            {
+                transform.Translate(Vector3.left*Time.deltaTime*leftRightSpeed);
+            }
+        }
+
+        else if (Input.GetKey(KeyCode.D)|| Input.GetKey(KeyCode.RightArrow))
+        {
+            if (this.gameObject.transform.position.x<LevelBoundary.RightSide)
+            {
+                transform.Translate(Vector3.left*Time.deltaTime*leftRightSpeed*-1);
+            } 
+        }
+        t = Time.time - starttime;
+        string minutes = ((int)t / 60).ToString();
+        string seconds = (t % 60).ToString("f2");
+        
+        timer.text=minutes+":"+seconds;
+        t = Time.time - starttime1;
+        string minutes1 = ((int)t / 60).ToString();
+        string seconds1 = (t % 60).ToString("f2");
+        
+        timer1.text=minutes1+":"+seconds;
+        
+    }
+   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name=="1")
+        {
+            Debug.Log("çarpıldı");
+            Destroy(collision.gameObject);
+            speed -= .02f;
+            starttime -= 10;
+            starttime1 -= 10;
+            
+
+
+        }
+        if (collision.gameObject.name=="Dead")
+        {
+            Debug.Log("öldün");
+            Dead.SetActive(true);
+            Time.timeScale = 0;
+            
+
+        }
+        if (collision.gameObject.name=="Finish")
+        {
+            Debug.Log("öldün");
+            Finish.SetActive(true);
+            Time.timeScale = 0;
+            timer2.SetActive(false);
+
+        }
+    }
+    
+}
