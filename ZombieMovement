@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class ZombiMovement : MonoBehaviour
+{
+    public float zspeed = 5f;
+    private float starttime = 1;
+
+    private float t;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector3.forward * zspeed * Time.deltaTime, Space.World);
+        t = Time.time - starttime;
+        string minutes = ((int)t / 60).ToString();
+        string seconds = (t % 60).ToString("f2");
+        if (t==60)
+        {
+            zspeed += 1;
+        }
+    }
+
+}
