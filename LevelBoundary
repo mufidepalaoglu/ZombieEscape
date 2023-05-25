@@ -1,0 +1,19 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LevelBoundary : MonoBehaviour
+{
+    // Start is called before the first frame update
+    public static float leftSide = 60f;
+    public static float RightSide = 70f;
+    public float internalLeft;
+    public float internalRight;
+
+    private void Update()
+    {
+        internalLeft = leftSide;
+        internalRight = RightSide;
+    }
+}
