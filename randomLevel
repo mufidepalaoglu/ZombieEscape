@@ -1,0 +1,32 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class RandomLevel : MonoBehaviour
+{
+    public GameObject[] section;
+    public int zPos = 470;
+    public bool creatingSction = false;
+    public int secNum;
+
+
+    private void Update()
+    {
+        if (creatingSction==false)
+        {
+            creatingSction = true;
+            StartCoroutine(GenerateSection());
+        }
+    }
+
+    IEnumerator GenerateSection()
+    {
+        secNum = Random.Range(1, 4);
+        Instantiate(section[secNum], new Vector3(0, 0, zPos), Quaternion.identity);
+        zPos += 470;
+        yield return new WaitForSeconds(2);
+        creatingSction = false;
+    }
+}
